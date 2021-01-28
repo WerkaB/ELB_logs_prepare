@@ -2,6 +2,9 @@ import os
 import csv
 import logging
 import statistics
+import prepare_log_files
+
+prepare_log_files.download_and_unzip()
 
 
 log_level = int(os.getenv("flask-log-level", "20"))
