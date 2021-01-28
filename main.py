@@ -54,5 +54,6 @@ def make_payload(path):
 if __name__ == '__main__':
     log.info(f"Generating new csv started")
 
-    payload = make_payload("/home/werka/Dokumenty/aws/logi_NLB_przetwarzanie/unzipped")
+    logs_location = os.getenv("logs_location")
+    payload = make_payload(logs_location)
     generate_csv("NLB_logs.csv", headers, payload)
