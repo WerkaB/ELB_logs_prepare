@@ -4,8 +4,7 @@ import logging
 import statistics
 import prepare_log_files
 
-prepare_log_files.download_and_unzip()
-
+# prepare_log_files.download_and_unzip()
 
 log_level = int(os.getenv("flask-log-level", "20"))
 log = logging.getLogger("prepare_elb_logs")
@@ -59,4 +58,5 @@ if __name__ == '__main__':
 
     logs_location = os.getenv("logs_location")
     payload = make_payload(logs_location)
-    generate_csv("NLB_logs.csv", headers, payload)
+    csv_abs_path = os.path.join(logs_location,"NLB_logs.csv")
+    generate_csv(csv_abs_path, headers, payload)
