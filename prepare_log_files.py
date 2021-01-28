@@ -9,16 +9,20 @@ def download_and_unzip():
     bucket_name = os.getenv("bucket_name")
     download_directory = os.getenv("download_directory")
 
+    account_nr = os.getenv("account_nr")
+    bucket_az = os.getenv("bucket_AZ")
+    logs_date = os.getenv("logs_date")
+    prefix = os.path.join("AWSLogs", account_nr, "elasticloadbalancing", bucket_az, logs_date)
+
     s3_resource = boto3.resource('s3')
-    s3_client = boto3.client('s3')
     my_bucket = s3_resource.Bucket(bucket_name)
 
-    for my_bucket_object in my_bucket.objects.filter(Prefix='AWSLogs/181550855204/elasticloadbalancing/eu-central-1/2021/01/28'):
+
+    for my_bucket_object in my_bucket.objects.filter(Prefix=prefix):
         print(my_bucket_object)
         path, filename = os.path.split(my_bucket_object.key)
         absolute_path = os.path.join(download_directory,filename)
         my_bucket.download_file(my_bucket_object.key, absolute_path)
-        # s3_client.download_file()
 
     unzip_files(download_directory)
 
