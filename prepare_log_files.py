@@ -24,7 +24,7 @@ def download_and_unzip(logger):
         my_bucket.download_file(my_bucket_object.key, absolute_path)
 
     logger.info("All files downloaded")
-    unzip_files()
+    unzip_files(logger)
 
 
 def unzip_files(logger):
